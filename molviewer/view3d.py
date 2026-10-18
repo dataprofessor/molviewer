@@ -16,10 +16,12 @@ from ._mol import ensure_mol, ensure_conformer
 
 
 def _detect_env():
-    """Detect runtime environment: 'jupyter', 'streamlit', or 'script'."""
+    """Detect runtime environment: 'colab', 'jupyter', 'streamlit', or 'script'."""
     if "streamlit" in sys.modules:
         return "streamlit"
     try:
+        if "google.colab" in sys.modules:
+            return "colab"
         shell = get_ipython().__class__.__name__
         if shell in ("ZMQInteractiveShell", "Shell"):
             return "jupyter"
@@ -63,10 +65,20 @@ def view3d(input_data, *, style="stick", size=(600, 400), spin=False,
         In notebook/Streamlit: displays inline.
     """
     if style == "speck":
-        return _view3d_speck(input_data, size=size, spin=spin, preset=preset,
-                             atom_scale=atom_scale, bond_scale=bond_scale,
-                             ao=ao, brightness=brightness, outline=outline,
-                             bonds=bonds)
+        env = _detect_env()
+        if env == "colab":
+            import warnings
+            warnings.warn(
+                "Speck WebGL widget is not supported in Google Colab. "
+                "Falling back to py3Dmol ball_and_stick style.",
+                stacklevel=2,
+            )
+            style = "ball_and_stick"
+        else:
+            return _view3d_speck(input_data, size=size, spin=spin, preset=preset,
+                                 atom_scale=atom_scale, bond_scale=bond_scale,
+                                 ao=ao, brightness=brightness, outline=outline,
+                                 bonds=bonds)
 
     try:
         import py3Dmol
@@ -92,7 +104,7 @@ def view3d(input_data, *, style="stick", size=(600, 400), spin=False,
 
     env = _detect_env()
 
-    if env == "jupyter":
+    if env in ("jupyter", "colab"):
         return viewer.show()
     elif env == "streamlit":
         import streamlit.components.v1 as components
