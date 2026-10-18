@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "molviewer"
+version = "0.1.0"
+description = "2D and 3D molecular visualization for Jupyter, Colab, and Streamlit"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Chanin Nantasenamat"},
+]
+keywords = [
+    "cheminformatics",
+    "molecular-visualization",
+    "drug-discovery",
+    "RDKit",
+    "py3Dmol",
+    "speck",
+    "jupyter",
+    "streamlit",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+    "numpy>=1.22",
+    "rdkit>=2023.03",
+    "py3Dmol>=2.0",
+    "ipyspeck>=0.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+attribution = [
+    "molfp>=0.3.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/dataprofessor/molviewer"
+Repository = "https://github.com/dataprofessor/molviewer"
+
+[tool.setuptools.packages.find]
+include = ["molviewer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::UserWarning",
+    "ignore::RuntimeWarning",
+    "ignore::DeprecationWarning",
+]
