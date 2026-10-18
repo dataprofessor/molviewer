@@ -49,11 +49,7 @@ molviewer.view3d("CCO", style="speck", atom_scale=0.6, ao=0.9, outline=1.0)
 
 Parameters: `atom_scale`, `bond_scale`, `ao`, `brightness`, `outline`, `bonds`.
 
-## Attribution Maps (requires molfp)
-
-```bash
-pip install molviewer[attribution]
-```
+## Attribution Maps
 
 ```python
 import molfp

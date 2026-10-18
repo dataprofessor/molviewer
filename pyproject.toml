@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "molviewer"
-version = "0.1.0"
+version = "0.1.1"
 description = "2D and 3D molecular visualization for Jupyter, Colab, and Streamlit"
 readme = "README.md"
 license = {text = "MIT"}
@@ -40,14 +40,12 @@ dependencies = [
     "rdkit>=2023.03",
     "py3Dmol>=2.0",
     "ipyspeck>=0.8",
+    "molfp>=0.3.4",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
-]
-attribution = [
-    "molfp>=0.3.4",
 ]
 
 [project.urls]
