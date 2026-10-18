@@ -53,6 +53,7 @@ Parameters: `atom_scale`, `bond_scale`, `ao`, `brightness`, `outline`, `bonds`.
 
 ```python
 import molfp
+import molviewer
 
 result = molfp.interpret(smiles, activities, fp_type="maccs")
 molviewer.draw_attribution("CC(=O)Oc1ccccc1C(=O)O", result, style="highlight", save="attr.png")
